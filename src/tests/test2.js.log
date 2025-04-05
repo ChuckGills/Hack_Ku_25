@@ -1,0 +1,6 @@
+
+C:\Users\charl\OneDrive\Programming\Github\Hack_Ku_25-\Formatters\tests\test2.js
+  14:5  error  'unusedVariable' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+
