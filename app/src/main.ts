@@ -1,6 +1,8 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+import { exec } from 'child_process';
+import path from 'node:path';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -13,7 +15,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, '/../../src/preload.ts'),
     },
   });
 
@@ -33,6 +35,29 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+
+ipcMain.handle('run-command', async (event, cmd: string) => {
+
+  const scriptPath = path.join(__dirname, '../../../gh_cli.py');
+
+  return new Promise((resolve, reject) => {
+    // Call Python script with the command as an argument.
+    exec(`python3 "${scriptPath}" ${cmd}`, (error, stdout, stderr) => {
+      if (error) {
+        return reject(stderr);
+      }
+      try {
+        const data = JSON.parse(stdout);
+        resolve(data);
+      } catch {
+        // If output isn't valid JSON, return it as-is.
+        resolve(stdout.trim());
+      }
+    });
+  });
+});
+
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -49,6 +74,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
