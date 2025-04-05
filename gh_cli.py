@@ -1,6 +1,21 @@
 import subprocess, json
 from gemini_handler import summarize_pr, review_pr
 
+
+# Global to Track the active repository path.
+active_repo = None
+
+
+def set_active_repo(repo_path):
+
+    # Set the active repository path
+    global active_repo
+    if not os.path.isdir(repo_path):
+        raise ValueError(f"{repo_path} is not a valid directory.")
+    active_repo = repo_path
+    print(f"Active repository set to: {active_repo}")
+
+
 def run_script(script, *args):
     result = subprocess.run([script, *args], capture_output=True, text=True)
 
