@@ -1,3 +1,14 @@
+ @keyframes slideUp {
+    from {
+	transform: translateY(100px);
+	opacity: 0;
+    }
+    to {
+	transform: translateY(0);
+	oapcity: 1;
+    }
+}
+
 .terminalContainer {
     display: flex;
     flex-direction: column;
@@ -24,17 +35,21 @@
 
 .inputContainer {
     /* flex: 1; */
+    position: relative;
     display: flex;
     align-items: center;
     /* width: 100%; */
     padding: 12px 16px;
     border-top: 1px solid #bbbbbb;
+    background-color: rgb(40, 60, 75);
+    z-index: 2;
 }
 
 .input {
     flex: 1;
     /* width: 100%; */
     /* width: auto; */
+    position: relative;
     background-color: transparent;
     border: none;
     font-family: inherit;
@@ -42,6 +57,9 @@
     outline: none;
     color: inherit;
     padding-bottom: 8px;
+
+    position: relative;
+    z-index: 2;
 }
 
 .prefix {
@@ -50,4 +68,15 @@
     user-select: none;
     font-size: 1rem;
     padding-bottom: 8px;
+}
+
+.commandMenu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 20%;
+    border: 1px solid #fff;
+    border-radius: 4px 4px 0px 0px;
+    z-index: 0;
+    animation: slideUp 0.3s ease-out;
 }

@@ -18,7 +18,7 @@ const createWindow = () => {
     },
   });
 
-  Menu.setApplicationMenu(null); // Remove menu bar
+   Menu.setApplicationMenu(null); // Remove menu bar
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
