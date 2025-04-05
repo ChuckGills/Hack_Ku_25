@@ -21,6 +21,17 @@ def summarize_pr(diff_text):
     response = model.generate_content(prompt)
     return response.text.strip()
 
+# Commit Title Generator
+def generate_commit_title(diff_text):
+    prompt = f"""
+    Write a simple git commit title that describes the biggest change made:
+
+    Diff:
+    {diff_text}
+    """
+    response = model.generate_content(prompt)
+    return response.text.strip()
+
 # Commit Message Generator
 def generate_commit_message(diff_text):
     prompt = f"""
