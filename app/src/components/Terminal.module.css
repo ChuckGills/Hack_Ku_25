@@ -1,9 +1,12 @@
 .terminalContainer {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
+    /* height: fit-content; */
     font-family: monospace;
     color: rgb(141, 242, 255);
+    max-height: 28vh;
+    overflow-y: none;
 }
 
 .outputContainer {
@@ -11,7 +14,7 @@
     flex-direction: column-reverse;
     flex: 1;
     overflow-y: auto;
-    padding: 16px;
+    /* padding: 16px; */
 }
 
 .output {
