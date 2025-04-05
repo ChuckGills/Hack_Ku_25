@@ -68,7 +68,9 @@ def format_javascript(filepath):
 def lint_cpp(filepath):
     result = subprocess.run(["clang-tidy", filepath, "--"],
                             capture_output=True, text=True)
-    print(result.stdout)
+    with open(f'../logs/{filepath}.log','w') as f:
+            f.write(result.stdout)
+            f.close()
     if result.stderr:
         print(result.stderr, file=sys.stderr)
 
