@@ -117,11 +117,13 @@ if __name__ == "__main__":
                 print(f"Git user: {result.stdout.strip()}")
             else:
                 print("Error retrieving git user.")
-        elif subcommand == "repos":
+    elif command == "repos":
+        subcommand = sys.argv[2]
+        if(subcommand == "list"):
             result = list_repos()
             print("Repos", result)
         else:
-            print(f"Unknown git subcommand: {subcommand}")
+            print("Error retrieving Repos.")
     else:
         print(f"Unknown command: {command}")
         print_help()

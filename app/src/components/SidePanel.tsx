@@ -12,14 +12,14 @@ export const SidePanel: React.FC = () => {
     useEffect(() => {
         // get repos
         const fetchRepos = async () => {
-            const result = await window.myAPI.runCommand('git repos');
+            const result = await window.myAPI.runCommand('repos list');
             let raw = result.replace(/^Repos\s*/, '');
             raw = raw.replace(/'/g, '"');
             const res: Repo[] = JSON.parse(raw.slice());
             setRepos(res);
         }
 
-        fetchRepos();        
+        fetchRepos();
     }, []);
 
     return (
