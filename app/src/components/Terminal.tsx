@@ -119,7 +119,7 @@ export const Terminal: React.FC = () => {
             <span className={styles.prefix}>{prefix}</span>
             <input ref={inputRef} onFocus={onFocus} onBlur={onBlur} value={cmdText} onChange={cmdTextInputHandler} className={styles.input} onKeyDown={handleKeyDown} placeholder="focus" />
 
-	    {autoComplete.length > 0 && isFocused && ( <div className={styles.commandMenu}>	{/* Autofill Box */}
+	    {autoComplete?.length > 0 && isFocused && ( <div className={styles.commandMenu}>	{/* Autofill Box */}
 		<ul>
 		{autoComplete.length > 0 && autoComplete.map((option, index) => (<li key={`autocomplete_option${index}`} style={{color: index===selectionIndex ? '#33ff33' : 'rgb(141, 242, 255)'}}>{option}</li>))}
 		</ul>
