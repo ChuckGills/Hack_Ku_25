@@ -7,10 +7,26 @@ interface ContentPanelProps {
 }
 
 export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
-    // const [repo, setRepo] = useState<Repo | null>();
+    // const [currRepo, setCurrRepo] = useState<Repo | null>();
     const [activeTab, setActiveTab] = useState<string | null>(null);
 
     const tabs = ['Summary', 'Pull Requests', 'Linter'];
+
+    const renderTab = () => {
+        switch (activeTab) {
+            case 'Summary':
+                // return <Summary repo={repo} />;
+                return <p>summary</p>
+            case 'Pull Requests':
+                // return <PullRequests repo={repo} />;
+                return <p>pull requests</p>
+            case 'Linter':
+                // return <Linter repo={repo} />;
+                return <p>linter</p>
+            default:
+                return null;
+        }
+    }
 
     return (
         <div className={styles.panelContainer}>
@@ -31,7 +47,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
             </div>
 
             <div className={styles.contentContainer}>
-                {activeTab}
+                {renderTab()}
             </div>
         </div>
     );

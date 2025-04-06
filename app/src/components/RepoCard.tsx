@@ -28,34 +28,45 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
         window.myAPI.openLink(url);  // Access the method exposed by preload.js
     };
 
-    return (
-        <div style={{ borderTop: '1px rgb(141, 242, 255) solid',
-		      borderBottom: '1px rgb(141, 242, 255) solid',
-		      padding: '12px',
-		      paddingBottom: '14px' }}>
-	    
-            <div style={{ display: 'flex',
-			  justifyContent: 'space-between',
-			  alignItems: 'center',
-			  width: '100%' }}>
+    const selectRepo = async (name: string) => {
+        const result = await window.myAPI.runCommand(`repo select ${name}`);
+    }
 
-	    <div className={styles.repoNameContainer}
-                 onClick={() => openLink(repo.url)}>
-	        <div className={styles.repoNameWrapper}>
-                    <span className={styles.repoName}> {repo.name} </span>
-	        </div>
-	    </div>
-	    
-            <span style={{ color: repo.visibility === 'PUBLIC'
-	                          ? 'white'
-	                          : repo.visibility === 'PRIVATE'
-	                          ? 'red'
-		                  : 'white',
-			       fontSize: 'x-small',
-			       alignSelf: 'center',
-			       paddingRight: '8px' }}> {repo.visibility} </span>
+    return (
+        <div style={{
+            borderTop: '1px rgb(141, 242, 255) solid',
+            borderBottom: '1px rgb(141, 242, 255) solid',
+            padding: '12px',
+            paddingBottom: '14px'
+        }}
+            onClick={()=>selectRepo(repo.name)}>
+
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%'
+            }}>
+
+                <div className={styles.repoNameContainer}
+                    onClick={() => openLink(repo.url)}>
+                    <div className={styles.repoNameWrapper}>
+                        <span className={styles.repoName}> {repo.name} </span>
+                    </div>
+                </div>
+
+                <span style={{
+                    color: repo.visibility === 'PUBLIC'
+                        ? 'white'
+                        : repo.visibility === 'PRIVATE'
+                            ? 'red'
+                            : 'white',
+                    fontSize: 'x-small',
+                    alignSelf: 'center',
+                    paddingRight: '8px'
+                }}> {repo.visibility} </span>
             </div>
-	    
+
             <span style={{ color: 'rgb(127, 210, 249)' }}>Updated: {simpleDate}</span><br />
             <br />
         </div>

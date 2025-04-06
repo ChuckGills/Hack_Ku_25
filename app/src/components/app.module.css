@@ -25,7 +25,7 @@
 
 .side {
     flex: 0 0 200px;
-    border-right: 1px solid #bbbbbb;
+    border-right: 3px solid #bbbbbb;
     font-family: 'BigBlueTerminal', sans-serif;
     color: rgb(89, 233, 255); 
     max-width: 23vw;
@@ -33,6 +33,8 @@
 
 .main {
     flex: 1;
+    font-family: 'BigBlueTerminal', sans-serif;
+    color: rgb(89, 233, 255); 
 }
 
 .terminalContainer {

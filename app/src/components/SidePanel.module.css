@@ -11,9 +11,9 @@
 .headerContainer{
     text-decoration: underline;
     font-size: larger;
-    padding: 16px 13px;
+    padding: 16px 15px;
     font-weight: bold;
-    border-bottom: solid 1px #bbbbbb;
+    border-bottom: solid 2px #bbbbbb;
     height: 3.5rem;
 }
 

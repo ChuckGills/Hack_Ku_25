@@ -15,18 +15,18 @@ export const SidePanel: React.FC<SidePanelProps> = ({ sendDataToParent }) => {
     useEffect(() => {
         // get repos
         const fetchRepos = async () => {
-            const result = await window.myAPI.runCommand('repos list');
-	    let lines = result.split('\n');
-	    // Filter out lines that start with "<generator"
-	    lines = lines.filter(line => !line.trim().startsWith('<generator'));
-	    // Rejoin the remaining lines
-	    let raw = lines.join('\n');
-	    // Remove a "Repos" prefix if present
-	    raw = raw.replace(/^Repos\s*/, '');
-	    // Optionally, replace single quotes with double quotes if needed
-	    raw = raw.replace(/'/g, '"');
-	    console.log("raw\n",raw);
-            const res: Repo[] = JSON.parse(raw.slice());
+            const result = await window.myAPI.runCommand('repo list');
+            // let lines = result.split('\n');
+            // Filter out lines that start with "<generator"
+            // lines = lines.filter(line => !line.trim().startsWith('<generator'));
+            // Rejoin the remaining lines
+            // let raw = lines.join('\n');
+            // Remove a "Repos" prefix if present
+            let raw = result.replace(/^Repositories:\s*/, '');
+            // Optionally, replace single quotes with double quotes if needed
+            raw = raw.replace(/'/g, '"');
+            console.log("raw\n", raw);
+            const res: Repo[] = JSON.parse(raw.slice("\n"));
             // console.log("raw", raw, raw.slice[0])
             setRepos(res);
         }
@@ -52,7 +52,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ sendDataToParent }) => {
             <div className={styles.contentContainer}>
                 {
                     repos.map((repo, index) => (
-                        <div onClick={()=>selectRepo(repo)}>
+                        <div onClick={() => selectRepo(repo)}>
                             <RepoCard
                                 key={`repo_card_${index}`}
                                 repo={repo}
