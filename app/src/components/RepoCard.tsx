@@ -57,7 +57,7 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
             </div>
 	    
             <span style={{ color: 'rgb(127, 210, 249)' }}>Updated: {simpleDate}</span><br />
-            <br/>
+            <br />
         </div>
     );
 }
