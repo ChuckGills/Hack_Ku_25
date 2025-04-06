@@ -1,0 +1,25 @@
+.panelContainer {
+    display: flex;
+    flex-direction: column; /* Stack header and content vertically */
+    height: 100%;
+}
+
+.headerContainer{
+    text-decoration: underline;
+    font-size: larger;
+    padding: 16px 12px;
+    font-weight: bold;
+    border-bottom: solid 1px #bbbbbb;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x:hidden;
+    overflow-wrap: break-word;
+    max-height: 100%;
+    /* word-wrap: normal; */
+    /* gap: 12px; */
+    /* font-size:x-small */
+}

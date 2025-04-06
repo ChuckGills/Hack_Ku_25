@@ -14,7 +14,7 @@
     flex-direction: column-reverse;
     flex: 1;
     overflow-y: auto;
-    min-height: 16em;
+    min-height: 23vh;
 }
 
 .output {
@@ -50,4 +50,8 @@
     user-select: none;
     font-size: 1rem;
     padding-bottom: 8px;
+}
+
+.side {
+    /* max-width: 10%; */
 }
