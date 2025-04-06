@@ -1,11 +1,44 @@
 import subprocess, json, os, sys
 from gemini_handler import summarize_pr, review_pr
 
-# Global to track the selected repository (its details from the repo list).
+# Global to track the selected repository.
 selected_repo = None
 
 # Determine the directory where gh_cli.py is located.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SELECTED_REPO_FILE = os.path.join(BASE_DIR, 'selected_repo.json')
+
+def load_selected_repo():
+    global selected_repo
+    if os.path.exists(SELECTED_REPO_FILE):
+        with open(SELECTED_REPO_FILE, 'r') as f:
+            try:
+                selected_repo = json.load(f)
+            except json.JSONDecodeError:
+                selected_repo = None
+
+def save_selected_repo():
+    with open(SELECTED_REPO_FILE, 'w') as f:
+        json.dump(selected_repo, f)
+
+def select_repo(repo):
+    global selected_repo
+    selected_repo = repo
+    save_selected_repo()
+
+def get_repo_slug(repo):
+    # If the repository data already includes a field with the full slug, return it.
+    if "ownerRepo" in repo:
+        return repo["ownerRepo"]
+    # Otherwise, try to parse it from the URL.
+    url = repo.get("url", "")
+    # Assuming the URL format is https://github.com/owner/repo
+    parts = url.split('/')
+    if len(parts) >= 5:
+        return parts[3] + '/' + parts[4]
+    else:
+        raise Exception("Invalid repository URL format")
+
 
 def run_script(script, *args):
     # Remove leading slash if present to treat as a relative path.
@@ -24,10 +57,13 @@ def run_script(script, *args):
 # PR Handling
 def list_prs(state="open"):
     if selected_repo is None:
-        raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
-    repo_name = selected_repo.get("name")
-    # Pass the repository name along with the state argument.
-    return run_script("/scripts/gh_pr_list.sh", repo_name, state)
+        raise Exception("No repository selected...")
+    # Try to get the full slug from the selected repo.
+    repo_slug = selected_repo.get("ownerRepo")
+    if not repo_slug:
+        repo_slug = get_repo_slug(selected_repo)  # This will parse it from the URL.
+    return run_script("/scripts/gh_pr_list.sh", repo_slug, state)
+
 
 def create_pr(title, body, base, head):
     if selected_repo is None:
@@ -38,8 +74,9 @@ def create_pr(title, body, base, head):
 def view_pr(pr_number):
     if selected_repo is None:
         raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
-    repo_name = selected_repo.get("name")
-    return run_script("/scripts/gh_pr_view.sh", repo_name, str(pr_number))
+    repo_slug = get_repo_slug(selected_repo)  # Use the full slug 
+    return run_script("/scripts/gh_pr_view.sh", repo_slug, str(pr_number))
+
 
 def pr_diff(pr_number):
     if selected_repo is None:
@@ -63,9 +100,6 @@ def list_repos():
     # Assumes your bash script returns a JSON array of repository details.
     return run_script("./scripts/gh_repo_list.sh")
 
-def select_repo(repo):
-    global selected_repo
-    selected_repo = repo
 
 def print_help():
     help_text = """
@@ -85,6 +119,8 @@ Commands:
     print(help_text)
 
 if __name__ == "__main__":
+    load_selected_repo()
+
     if len(sys.argv) < 2:
         print_help()
         sys.exit(1)
