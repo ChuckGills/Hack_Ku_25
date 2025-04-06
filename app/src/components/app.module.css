@@ -58,4 +58,9 @@
     padding: 4px 2px;
     font-weight: bold;
     height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: #fff;
+    border: #bbb solid 3px;
 }

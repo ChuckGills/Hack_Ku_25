@@ -25,6 +25,10 @@ n
     overflow: hidden;
 }
 
+.repoInfoWrapper {
+    max-width: 100%;
+}
+
 .repoName {
     font-weight: semi-bold;
     font-size: 20px;
@@ -36,11 +40,11 @@ n
 }
 
 .repoCardContainer{
-    border: 1px rgb(141, 242, 255) solid;
+    border: rgb(141, 242, 255) 3px solid;
     padding: 8px;
     padding-bottom: 14px;
     overflow: hidden;
-    max-width: 23vh;
+    max-width: 22.7vh;
     background-color: rgb(15, 17, 25);
     color: rgb(141, 242, 255);
 }

@@ -51,8 +51,6 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
                     </div>
                 </div>
 
-
-
                 <span style={{
                     color: repo.visibility === 'PUBLIC'
                         ? 'white'
@@ -65,8 +63,14 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
                 }}> {repo.visibility} </span>
             </div>
 
-            <span style={{ color: 'rgb(127, 210, 249)' }}>Updated: {simpleDate}</span><br />
-            <br />
+            <span style={{
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '100%',
+		overflow: 'hidden',
+		cursor: 'pointer'
+	    }}>Updated: {simpleDate}</span>
         </div>
     );
 }
