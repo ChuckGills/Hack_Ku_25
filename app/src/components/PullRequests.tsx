@@ -16,6 +16,7 @@ export interface PullRequest {
 export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToParent }) => {
     const [openPrs, setOpenPrs] = useState<PullRequest[]>([]);
     const [closedPrs, setClosedPrs] = useState<PullRequest[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if (repo === null) {
@@ -38,6 +39,7 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
             }));
             setOpenPrs(openPrArr);
             setClosedPrs(closedPrArr);
+            setLoading(false);
             // return result;
         }
         getPrList();
@@ -50,26 +52,28 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
 
     return (
         <div className={styles.pullRequestContainer}>
-            {
-                openPrs.map((pr, index) => (
-                    <div className={styles.openPullRequest} onClick={() => selectPr(pr)}>
-                        <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
-                        <span style={{ color: '#33ff33' }}>{`open`}</span>
-                        <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
-                        <span style={{ color: 'white' }}>{`${pr.title}`}</span>
-                    </div>
-                ))
-            }
-            {
-                closedPrs.map((pr, index) => (
-                    <div className={styles.closedPullRequest} onClick={() => selectPr(pr)}>
-                        <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
-                        <span style={{ color: 'red' }}>{`closed`}</span>
-                        <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
-                        <span style={{ color: 'white' }}>{`${pr.title}`}</span>
-                    </div>
-                ))
-            }
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <>
+                    {openPrs.map((pr, index) => (
+                        <div className={styles.openPullRequest} onClick={() => selectPr(pr)} key={`open_${pr.number}`}>
+                            <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
+                            <span style={{ color: '#33ff33' }}>{`open`}</span>
+                            <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
+                            <span style={{ color: 'white' }}>{`${pr.title}`}</span>
+                        </div>
+                    ))}
+                    {closedPrs.map((pr, index) => (
+                        <div className={styles.closedPullRequest} onClick={() => selectPr(pr)} key={`closed_${pr.number}`}>
+                            <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
+                            <span style={{ color: 'red' }}>{`closed`}</span>
+                            <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
+                            <span style={{ color: 'white' }}>{`${pr.title}`}</span>
+                        </div>
+                    ))}
+                </>
+            )}
         </div>
     );
 }
