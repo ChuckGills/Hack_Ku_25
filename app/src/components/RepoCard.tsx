@@ -43,8 +43,10 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
             }}>
                 <span style={{
                     fontWeight: 'semi-bold',
-                    marginBottom: '4px'
-                }}>
+                    marginBottom: '4px',
+		    cursor: 'pointer'
+                }}
+	onClick={() => openLink(repo.url)}>
                     <u>{repo.name}</u>
                 </span>
                 <span style={{
@@ -57,16 +59,7 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
                 </span>
             </div>
             <span style={{ color: 'rgb(127, 210, 249)' }}>Updated: {simpleDate}</span><br />
-            <span style={{
-                color: 'rgb(230, 193, 255)',
-                cursor: 'pointer'
-            }}
-                onClick={() => openLink(repo.url)}>
-                <u>
-                    {/* <a href={repo.url} target="_blank"> */}
-                    {repo.url}
-                    {/* </a> */}
-                </u></span><br />
+            <br/>
         </div>
     );
 }
