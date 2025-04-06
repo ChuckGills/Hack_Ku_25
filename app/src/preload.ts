@@ -8,16 +8,8 @@ contextBridge.exposeInMainWorld('myAPI', {
 });
 
 contextBridge.exposeInMainWorld('geminiAPI', {
-  summarizePR: (diffText: string) => ipcRenderer.invoke('gemini-summarize-pr', diffText),
-  reviewPR: (diffText: string) => ipcRenderer.invoke('gemini-review-pr', diffText),
-  generateCommitTitle: (diffText: string) => ipcRenderer.invoke('gemini-generate-commit-title', diffText),
-  generateCommitMessage: (diffText: string) => ipcRenderer.invoke('gemini-generate-commit-message', diffText)
-});
-
-
-contextBridge.exposeInMainWorld('geminiAPI', {
-  summarizePR: (diffText: string) => ipcRenderer.invoke('gemini-summarize-pr', diffText),
-  reviewPR: (diffText: string) => ipcRenderer.invoke('gemini-review-pr', diffText),
-  generateCommitTitle: (diffText: string) => ipcRenderer.invoke('gemini-generate-commit-title', diffText),
-  generateCommitMessage: (diffText: string) => ipcRenderer.invoke('gemini-generate-commit-message', diffText)
+  summarizePR: (diffText) => ipcRenderer.invoke('gemini-summarize-pr', diffText),
+  reviewPR: (diffText) => ipcRenderer.invoke('gemini-review-pr', diffText),
+  generateCommitTitle: (diffText) => ipcRenderer.invoke('gemini-generate-commit-title', diffText),
+  generateCommitMessage: (diffText) => ipcRenderer.invoke('gemini-generate-commit-message', diffText)
 });
