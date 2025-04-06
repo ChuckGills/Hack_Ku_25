@@ -12,7 +12,7 @@
 }
 
 .side {
-    flex: 1;
+    flex: 0 0 20%;
     border-right: 1px solid #bbbbbb;
     font-family:sans-serif;
     color: rgb(89, 233, 255);

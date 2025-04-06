@@ -18,6 +18,7 @@
     color: rgb(141, 242, 255);
     max-height: 28vh;
     overflow-y: none;
+    z-index: 0;
 }
 
 .outputContainer {
@@ -42,14 +43,13 @@
     padding: 12px 16px;
     border-top: 1px solid #bbbbbb;
     background-color: rgb(40, 60, 75);
-    z-index: 2;
+    z-index: 100;
 }
 
 .input {
     flex: 1;
     /* width: 100%; */
     /* width: auto; */
-    position: relative;
     background-color: transparent;
     border: none;
     font-family: inherit;
@@ -59,7 +59,7 @@
     padding-bottom: 8px;
 
     position: relative;
-    z-index: 2;
+    z-index: 100;
 }
 
 .prefix {
@@ -72,11 +72,13 @@
 
 .commandMenu {
     position: absolute;
+    background-color: rgb(40, 60, 75);
     bottom: 100%;
     left: 0;
-    width: 20%;
+    width: fit-content;
     border: 1px solid #fff;
     border-radius: 4px 4px 0px 0px;
-    z-index: 0;
+    padding-right: 10px;
+    z-index: 1;
     animation: slideUp 0.3s ease-out;
 }
