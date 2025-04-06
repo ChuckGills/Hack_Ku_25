@@ -29,4 +29,5 @@
 }
 
 .pullRequestContainer {
+    overflow-y: scroll;
 }
