@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Repo} from './RepoCard.tsx';
 import styles from './ContentPanel.module.css';
 import { PullRequest, PullRequests } from './PullRequests.tsx';
+import { Summary } from './Summary.tsx';
 
 
 interface ContentPanelProps {
@@ -15,7 +16,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
     const [activeTab, setActiveTab] = useState<string>('Pull Requests');
     const [pullReq, setPullReq] = useState<PullRequest>(null);
 
-    const tabs = ['Pull Requests','Summary', 'Linter'];
+    const tabs = ['Pull Requests','Summary',];
 
     const handleChildData = (pr: PullRequest) => {
         setPullReq(pr);
@@ -25,14 +26,10 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
     const renderTab = () => {
         switch (activeTab) {
             case 'Summary':
-                // return <Summary repo={repo} />;
+                return <Summary repo={repo} pr={pullReq}/>;
                 return <p>summary</p>
             case 'Pull Requests':
                 return <PullRequests repo={repo} sendDataToParent={handleChildData}/>;
-                // return <p>pull requests</p>
-            case 'Linter':
-                // return <Linter repo={repo} />;
-                return <p>linter</p>
             default:
                 return null;
         }
