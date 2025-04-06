@@ -15,12 +15,14 @@
 n
 .repoNameContainer {
     cursor: pointer;
+    max-width: 50%;
 }
 
 .repoNameWrapper {
     display: flex;
-    transform: translateX(0);
     margin: 4px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .repoName {
@@ -48,4 +50,6 @@ n
     overflow: visible;
     background-color: rgb(15, 17, 25);
     max-width: 100vh;
+    transition-duration: 1s;
+    transition-property: max-width;
 }

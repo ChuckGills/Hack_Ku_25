@@ -21,11 +21,12 @@
 
 .side {
   /* Outer container – allows horizontal overflow */
-  max-width: 25vh;
-  max-height: 70vh;
+  max-width: 24.8vh;
+  max-height: 70pvh;
   font-family: 'BigBlueTerminal', sans-serif;
   color: rgb(89, 233, 255);
   white-space: pre;
+  border-color: rgb(141, 242, 255) solid 2px; 
   overflow: visible; /* Allow elements to overflow horizontally */
   position: relative; /* If needed for positioning absolute children */
 }
@@ -38,7 +39,6 @@
     max-height: 64.9vh; /* Or whatever height you want */
     min-width: 50vh;
     padding-right: 20px;
-    border-color: rgb(141, 242, 255) solid 2px; 
   /* Optionally, add padding/margin so the scrollbar doesn't cover your content */
 }
 

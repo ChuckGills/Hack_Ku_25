@@ -44,11 +44,9 @@
 }
 
 .inputContainer {
-    /* flex: 1; */
     position: relative;
     display: flex;
     align-items: center;
-    /* width: 100%; */
     padding: 12px 16px;
     border-top: 3px solid #bbbbbb;
     background-color: rgb(35, 48, 50);
@@ -57,8 +55,6 @@
 
 .input {
     flex: 1;
-    /* width: 100%; */
-    /* width: auto; */
     background-color: transparent;
     border: none;
     font-family: inherit;
