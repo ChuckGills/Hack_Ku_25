@@ -17,6 +17,7 @@
     min-height: 70vh;
     overflow: visible;
     max-height: 60vh;
+    overflow-y: hidden;
 }
 
 .side {
