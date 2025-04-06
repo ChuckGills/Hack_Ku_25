@@ -84,22 +84,29 @@ export const Terminal: React.FC = () => {
 	    e.preventDefault();
 	    let commandToken = cmdText.split(" ");
 	    const completedCommand = autoComplete[selectionIndex];
+	    const partialCommand = commands.find(cmd => cmd.name === commandToken[0]);
 
 	    if (commandToken.length > 1)
 	    {
 		commandToken[commandToken.length - 1] = completedCommand;
+		setCmdText(
+		    commandToken.join(" ") + " "
+		);
+		setSelectionIndex(0);
+		setAutoComplete(filterCommands(commandToken.join(" ") + " "));
+	    }
+	    else if (commandToken.length === 1 && partialCommand != null) {
+		setCmdText(commandToken.join(" ") + " ");
 	    }
 	    else
 	    {
 		commandToken[0] = completedCommand;
+		setCmdText(
+		    commandToken.join(" ") + " "
+		);
+		setSelectionIndex(0);
+		setAutoComplete(filterCommands(commandToken.join(" ") + " "));
 	    }
-
-	    
-	    setCmdText(
-		commandToken.join(" ") + " "
-	    );
-	    setSelectionIndex(0);
-	    setAutoComplete(filterCommands(commandToken.join(" ") + " "));
 	}
 	
 	if (e.key !== "Enter") return;
