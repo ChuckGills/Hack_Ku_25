@@ -53,14 +53,9 @@
     color: rgb(141, 242, 255);
 }
 
-.terminalContainer {
-   
-}
-
 .headerContainer{
-    border-bottom: #bbb solid 2px;
     font-size: larger;
     padding: 4px 2px;
     font-weight: bold;
-    height: 2.7rem;
+    height: 3rem;
 }
