@@ -238,9 +238,8 @@ if __name__ == "__main__":
             try:
                 repos = list_repos()
                 if isinstance(repos, list) and repos:
-                    print("Repositories:")
                     for repo in repos:
-                        print(repo.get("name"))
+                        print(f"Name: {repo.get('name')}, Visibility: {repo.get('visibility')}, Updated At: {repo.get('updatedAt')}, URL: {repo.get('url')}")
                 else:
                     print("No repositories found.")
             except Exception as e:
