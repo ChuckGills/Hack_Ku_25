@@ -9,7 +9,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('models/gemini-1.5-pro')
-print(genai.list_models())
+
 
 # PR Summarization
 def summarize_pr(diff_text, temperature=0.7):
