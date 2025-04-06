@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Repo } from "./RepoCard";
 import { PullRequest } from './PullRequests';
 
-interface SummaryProps {
-    repo: Repo,
+interface CodeReviewProps {
     pr: PullRequest
 }
 
-export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
+export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
     const [text, setText] = useState<string>('');
-    useEffect(()=>{
-        if (repo === null || pr === null)
+
+    useEffect(() => {
+        if (pr === null)
             return;
 
         const getSummary = async () => {
-            const data = await window.myAPI.runCommand(`gemini summarize ${pr.number}`);
-            console.log("summarize",data);
+            const data = await window.myAPI.runCommand(`gemini review ${pr.number}`);
+            console.log("review", data);
             setText(data);
         }
         getSummary();
 
     }, [pr])
 
-
     return (
         <div>
             {text}
         </div>
-    );
+    )
 }

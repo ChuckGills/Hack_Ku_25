@@ -3,6 +3,7 @@ import {Repo} from './RepoCard.tsx';
 import styles from './ContentPanel.module.css';
 import { PullRequest, PullRequests } from './PullRequests.tsx';
 import { Summary } from './Summary.tsx';
+import { CodeReview } from './CodeReview.tsx';
 
 
 interface ContentPanelProps {
@@ -16,7 +17,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
     const [activeTab, setActiveTab] = useState<string>('Pull Requests');
     const [pullReq, setPullReq] = useState<PullRequest>(null);
 
-    const tabs = ['Pull Requests','Summary',];
+    const tabs = ['Pull Requests','Summary','Code Review'];
 
     const handleChildData = (pr: PullRequest) => {
         setPullReq(pr);
@@ -30,6 +31,8 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
                 return <p>summary</p>
             case 'Pull Requests':
                 return <PullRequests repo={repo} sendDataToParent={handleChildData}/>;
+            case 'Code Review':
+                return <CodeReview pr={pullReq}/>
             default:
                 return null;
         }
