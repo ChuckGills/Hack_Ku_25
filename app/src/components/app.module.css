@@ -9,6 +9,10 @@
     border-bottom: 1px solid #bbbbbb;
     height: 69vh;
     /* min-height: 65vh; */
+    /* order-right: 1px solid #bbbbbb; */
+    font-family:sans-serif;
+    color: rgb(89, 233, 255);
+    /* max-width: 25vw; */
 }
 
 .side {
