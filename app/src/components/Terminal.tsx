@@ -15,40 +15,38 @@ const commands: Command[] = [
 function filterCommands(input: string): string[] {
     // If input is empty, display the top-level commands
     input.trim();
-  if (input === '') {
-    return commands.map(cmd => cmd.name);
-    
-  }
-
-  // Split the input into tokens to check if user entered a command and perhaps a sub-command
-  const tokens = input.split(' ');
-
-  // When only the top-level command (or its prefix) is entered
-  if (tokens.length === 1) {
-    // Look for commands that start with the typed text
-    const matchingCommands = commands.filter(cmd => cmd.name.startsWith(tokens[0]));
-
-    // If the input exactly matches one top-level command, show its sub-commands
-    if (matchingCommands.length === 1 && matchingCommands[0].name === tokens[0]) {
-	return matchingCommands[0].subCommands;
-    } else {
-      // Otherwise, show matching top-level command suggestions
-	return matchingCommands.map(cmd => cmd.name);
+    if (input === '') {
+	return commands.map(cmd => cmd.name);
+	
     }
-  } else if (tokens.length > 1) {
-    // If the user has typed a top-level command and begun a sub-command, find the command first.
-    const mainCommand = tokens[0];
-    const subCommandInput = tokens[1];
 
-    const command = commands.find(cmd => cmd.name === mainCommand);
-    if (command) {
-      // Filter the sub-commands based on the input.
-      const matchingSubCommands = command.subCommands.filter(sub =>
-        sub.startsWith(subCommandInput)
-      );
-      return matchingSubCommands;
+    // Split the input into tokens to check if user entered a command and perhaps a sub-command
+    const tokens = input.split(' ');
+
+    // When only the top-level command (or its prefix) is entered
+    if (tokens.length === 1) {
+	// Look for commands that start with the typed text
+	const matchingCommands = commands.filter(cmd => cmd.name.startsWith(tokens[0]));
+
+	// If the input exactly matches one top-level command, show its sub-commands
+	if (matchingCommands.length === 1 && matchingCommands[0].name === tokens[0]) {
+	    return matchingCommands[0].subCommands;
+	} else {
+	    // Otherwise, show matching top-level command suggestions
+	    return matchingCommands.map(cmd => cmd.name);
+	}
+    } else if (tokens.length > 1) {
+	// If the user has typed a top-level command and begun a sub-command, find the command first.
+	const mainCommand = tokens[0];
+	const subCommandInput = tokens[1];
+
+	const command = commands.find(cmd => cmd.name === mainCommand);
+	if (command) {
+	    // Filter the sub-commands based on the input.
+	    const matchingSubCommands = command.subCommands.filter(sub => sub.startsWith(subCommandInput));
+	    return matchingSubCommands;
+	}
     }
-  }
 }
 
 export const Terminal: React.FC = () => {
