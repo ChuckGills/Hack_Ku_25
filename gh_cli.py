@@ -146,11 +146,10 @@ if __name__ == "__main__":
                 "open": open_prs,
                 "closed": closed_prs
             }
-    if open_prs or closed_prs:
-        print(json.dumps(result, indent=2))
-    else:
-        print("No PRs found.")
-
+            if open_prs or closed_prs:
+                print(json.dumps(result, indent=2))
+            else:
+                print("No PRs found.")
         elif subcommand == "create":
             if len(sys.argv) < 7:
                 print("Usage: gh_cli.py pr create <title> <body> <base> <head>")
