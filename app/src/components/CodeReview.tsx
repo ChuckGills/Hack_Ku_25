@@ -32,7 +32,10 @@ export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
             width: '75vw',
             overflowY: 'scroll',
             height: '61vh',
-            fontFamily: "'BigBlueTerminal', sans-serif"
+            fontFamily: "'BigBlueTerminal', sans-serif",
+            fontWeight: 'lighter',
+            fontSize: '16px',
+            lineHeight: '22px'
             // wordBreak: 'break-word',
             // overflowWrap: 'break-word',
         }}>
