@@ -217,14 +217,6 @@ if __name__ == "__main__":
         else:
             print(f"Unknown git subcommand: {subcommand}")
 
-    elif command == "repos":
-        subcommand = sys.argv[2]
-        if subcommand == "list":
-            result = list_repos()
-            print("Repos", result)
-        else:
-            print(f"Unknown git subcommand: {subcommand}")
-
     elif command == "repo":
         if len(sys.argv) < 3:
             print("Please specify a repo subcommand (list, select)")
@@ -236,7 +228,7 @@ if __name__ == "__main__":
                 if isinstance(repos, list) and repos:
                     print("Repositories:")
                     for repo in repos:
-                        print(repo.get("name"))
+                        print(f"Name: {repo.get('name')}, Visibility: {repo.get('visibility')}, Updated At: {repo.get('updatedAt')}, URL: {repo.get('url')}")
                 else:
                     print("No repositories found.")
             except Exception as e:
