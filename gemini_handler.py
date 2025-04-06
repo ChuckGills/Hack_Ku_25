@@ -48,9 +48,8 @@ def generate_commit_message(diff_text):
 def review_pr(diff_text, temperature=0.7):
     prompt = f"""
     Perform a detailed code review for the following pull request diff. Analyze the changes and explain:
-    - What changes were made and why they might have been introduced.
-    - Any potential issues, bugs, or areas for improvement.le code review of the changes within the big pairs (Ex: GitHub has green and red for changed "pairs") So please provide code bits of the changes and explain.
-
+    - The bigger changes made within the code in a simple, alongside the code changes(Ex: GitHub has green and red for changed "pairs") 
+    - Any potential issues, bugs, or areas for improvement
     Diff:
     {diff_text}
     """

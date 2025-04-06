@@ -12,6 +12,8 @@ interface SummaryProps {
 
 export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
     const [text, setText] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
+
     useEffect(() => {
         if (repo === null || pr === null)
             return;
@@ -20,6 +22,7 @@ export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
             const data = await window.myAPI.runCommand(`gemini summarize ${pr.number}`);
             console.log("summarize", data);
             setText(data);
+            setLoading(false);
         }
         getSummary();
 
@@ -40,7 +43,8 @@ export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
             // wordBreak: 'break-word',
             // overflowWrap: 'break-word',
         }}>
-            <ReactMarkDown
+            {!loading ? (<>
+                <ReactMarkDown
                 children={text}
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
@@ -86,6 +90,16 @@ export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
             <br />
             <br />
             <br />
+            </>):(
+                <img src={'logo.png'} style={{
+                    display:'flex',
+                    justifyContent:'center',
+                    alignItems:'center',
+                    maxWidth: '100%', /* Ensure the image fits within the container */
+                    height: 'auto'
+                  }}/>
+            )}
+            
         </div >
     );
 }

@@ -11,6 +11,7 @@ interface CodeReviewProps {
 
 export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
     const [text, setText] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         if (pr === null)
@@ -39,6 +40,7 @@ export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
             // wordBreak: 'break-word',
             // overflowWrap: 'break-word',
         }}>
+          {!loading ? (<>
             <ReactMarkDown
                   children={text}
                   remarkPlugins={[remarkGfm]}
@@ -85,6 +87,16 @@ export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
             <br />
             <br />
             <br />
+            </>):(
+              // <div>Loading...</div>
+              <img src={'logo.png'} style={{
+                display:'flex',
+                justifyContent:'center',
+                alignItems:'center',
+                maxWidth: '100%', /* Ensure the image fits within the container */
+                height: 'auto'
+              }}/>
+            )}
         </div >
     )
 }
