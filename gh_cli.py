@@ -217,13 +217,17 @@ if __name__ == "__main__":
         else:
             print(f"Unknown git subcommand: {subcommand}")
 
-    elif command == "repos":
-        subcommand = sys.argv[2]
-        if subcommand == "list":
-            result = list_repos()
-            print("Repos", result)
-        else:
-            print(f"Unknown git subcommand: {subcommand}")
+    elif command == "api":
+        if len(sys.argv) < 3:
+            print("Usage: gh_cli.py api <arguments>")
+            sys.exit(1)
+        try:
+            # Pass all arguments after "api" to the API script.
+            result = gh_api(*sys.argv[2:])
+            print(result)
+        except Exception as e:
+            print(e)
+
 
     elif command == "repo":
         if len(sys.argv) < 3:
