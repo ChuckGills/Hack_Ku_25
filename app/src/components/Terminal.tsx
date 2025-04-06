@@ -8,8 +8,9 @@ interface Command {
 
 // Define your commands
 const commands: Command[] = [
-  { name: 'pr', subCommands: ['view', 'list', 'create'] },
-  { name: 'git', subCommands: ['user'] }
+    { name: 'pr', subCommands: ['view', 'list', 'create'] },
+    { name: 'git', subCommands: ['user'] },
+    { name: 'repo', subCommands: ['list', 'select']}
 ];
 
 function filterCommands(input: string): string[] {
