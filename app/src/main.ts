@@ -58,6 +58,59 @@ ipcMain.handle('run-command', async (event, cmd: string) => {
   });
 });
 
+// Gemini IPC Handlers
+ipcMain.handle('gemini-summarize-pr', async (event, diffText: string) => {
+  return new Promise((resolve, reject) => {
+    // The command "gemini summarize" will be interpreted in gh_cli.py
+    const scriptPath = path.join(__dirname, 'gh_cli.py');
+    exec(`python3 "${scriptPath}" gemini summarize "${diffText}"`, (error, stdout, stderr) => {
+      if (error) {
+        return reject(stderr);
+      }
+      resolve(stdout.trim());
+    });
+  });
+});
+
+ipcMain.handle('gemini-review-pr', async (event, diffText: string) => {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, 'gh_cli.py');
+    exec(`python3 "${scriptPath}" gemini review "${diffText}"`, (error, stdout, stderr) => {
+      if (error) {
+        return reject(stderr);
+      }
+      resolve(stdout.trim());
+    });
+  });
+});
+
+ipcMain.handle('gemini-generate-commit-title', async (event, diffText: string) => {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, 'gh_cli.py');
+    exec(`python3 "${scriptPath}" gemini commit-title "${diffText}"`, (error, stdout, stderr) => {
+      if (error) {
+        return reject(stderr);
+      }
+      resolve(stdout.trim());
+    });
+  });
+});
+
+ipcMain.handle('gemini-generate-commit-message', async (event, diffText: string) => {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, 'gh_cli.py');
+    exec(`python3 "${scriptPath}" gemini commit-message "${diffText}"`, (error, stdout, stderr) => {
+      if (error) {
+        return reject(stderr);
+      }
+      resolve(stdout.trim());
+    });
+  });
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
