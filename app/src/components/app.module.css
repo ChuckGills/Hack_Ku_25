@@ -35,9 +35,10 @@
     display: flex;
     overflow-y: scroll; /* Enable vertical scrolling */
     overflow-x: visible; /* Clip horizontal overflow if needed here */
-    max-height: 70vh; /* Or whatever height you want */
+    max-height: 64.9vh; /* Or whatever height you want */
     min-width: 50vh;
     padding-right: 20px;
+    border-color: rgb(141, 242, 255) solid 2px; 
   /* Optionally, add padding/margin so the scrollbar doesn't cover your content */
 }
 
@@ -49,9 +50,17 @@
     z-index: 99;
     position: relative;
     overflow: visible;
+    color: rgb(141, 242, 255);
 }
 
 .terminalContainer {
-    
+   
 }
- 
+
+.headerContainer{
+    border-bottom: #bbb solid 2px;
+    font-size: larger;
+    padding: 4px 2px;
+    font-weight: bold;
+    height: 2.7rem;
+}

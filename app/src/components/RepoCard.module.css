@@ -12,7 +12,7 @@
     color: #33ff33;
   }
 }
-
+n
 .repoNameContainer {
     cursor: pointer;
 }
@@ -35,11 +35,12 @@
 
 .repoCardContainer{
     border: 1px rgb(141, 242, 255) solid;
-    padding: 12px;
+    padding: 8px;
     padding-bottom: 14px;
     overflow: hidden;
-    max-width: 20vh;
+    max-width: 23vh;
     background-color: rgb(15, 17, 25);
+    color: rgb(141, 242, 255);
 }
 
 .repoCardContainer:hover{

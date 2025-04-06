@@ -20,6 +20,9 @@ const App: React.FC = () => {
             <div className={styles.contentContainer}>
 
 	    <div className={styles.side}>
+	        <div className={styles.headerContainer}>
+                    Repositories
+                </div>
 	        <div className={styles.sideScroll}>
         	    {/* All the content that needs vertical scrolling goes here */}
 	            <SidePanel />

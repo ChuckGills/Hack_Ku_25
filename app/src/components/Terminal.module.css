@@ -22,9 +22,9 @@
     /* height: 100vh; */
     /* height: fit-content; */
     font-family: 'BigBlueTerminal', monospace;
-    Color: rgb(141, 242, 255);
+    color: rgb(141, 242, 255);
     border: 3px solid #bbb;
-    max-height: 28vh;
+    max-height: 30vh;
     overflow-y: none;
     z-index: 0;
     background-color: rgb(15, 17, 25);

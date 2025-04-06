@@ -45,10 +45,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({ sendDataToParent }) => {
 
     return (
         <div className={styles.panelContainer}>
-            <div className={styles.headerContainer}>
-                Repositories
-            </div>
-
             <div className={styles.contentContainer}>
                 {
                     repos.map((repo, index) => (
