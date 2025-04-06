@@ -1,0 +1,7 @@
+.repoName {
+    color: #33ff33;
+}
+
+.repoName:hover {
+    color: #ff99;
+}

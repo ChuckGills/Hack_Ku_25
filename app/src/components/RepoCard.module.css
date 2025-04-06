@@ -1,0 +1,42 @@
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    color: #33ff33;
+  }
+  50% {
+    transform: scale(1.05);
+    color: #ffffff;
+  }
+  100% {
+    transform: scale(1);
+    color: #33ff33;
+  }
+}
+
+.repoNameContainer {
+    display: flex;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.repoNameContainer:hover {
+    animation: pulsate 2s linear infinite;
+    overflow: visible;
+    white-space: pre;
+}
+
+.repoNameWrapper {
+    display: flex;
+    transform: translateX(0);
+    margin: 4px;
+}
+
+.repoName {
+    font-weight: semi-bold;
+    font-size: 20px;
+    margin: 4px;
+}
+
+.repoName:hover {
+    cursor: pointer;
+}
