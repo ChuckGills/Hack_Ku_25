@@ -142,9 +142,7 @@ if __name__ == "__main__":
                 print(e)
                 sys.exit(1)
             if prs:
-                print("Open PRs:")
-                for pr in prs:
-                    print(f"#{pr['number']} {pr['title']} by {pr['author']['login']}")
+                print(prs)
             else:
                 print("No open PRs found.")
         elif subcommand == "create":
