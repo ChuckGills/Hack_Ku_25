@@ -34,13 +34,13 @@ export const SidePanel: React.FC<SidePanelProps> = ({ sendDataToParent }) => {
     }, []);
 
     const selectRepo = (repo: Repo) => {
-        const fetchRepo = async () => {
+        const runRepoSelect = async () => {
             const result = await window.myAPI.runCommand(`repo select ${repo.name}`);
             console.log(result);
             sendDataToParent(repo);
 
         }
-        fetchRepo();
+        runRepoSelect();
     }
 
     return (

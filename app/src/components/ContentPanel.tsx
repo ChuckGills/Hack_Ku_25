@@ -1,18 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import {Repo} from './RepoCard.tsx';
 import styles from './ContentPanel.module.css';
-import { PullRequests } from './PullRequests.tsx';
+import { PullRequest, PullRequests } from './PullRequests.tsx';
 
 
 interface ContentPanelProps {
-    repo: Repo;
+    repo: Repo,
+    pr: PullRequest,
+    sendDataToParent: (data: PullRequest) => void;
 }
 
-export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
+export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
     // const [currRepo, setCurrRepo] = useState<Repo | null>();
     const [activeTab, setActiveTab] = useState<string | null>(null);
+    const [pullReq, setPullReq] = useState<PullRequest>(null);
 
     const tabs = ['Summary', 'Pull Requests', 'Linter'];
+
+    const handleChildData = (pr: PullRequest) => {
+        setPullReq(pr);
+        
+    }
 
     const renderTab = () => {
         switch (activeTab) {
@@ -20,7 +28,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
                 // return <Summary repo={repo} />;
                 return <p>summary</p>
             case 'Pull Requests':
-                return <PullRequests repo={repo} />;
+                return <PullRequests repo={repo} sendDataToParent={handleChildData}/>;
                 // return <p>pull requests</p>
             case 'Linter':
                 // return <Linter repo={repo} />;
@@ -35,6 +43,7 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
             <div className={styles.headerContainer}>
                 <div className={styles.repoText}>
                     {repo ? repo.name : 'Select a repository!'}
+                    {pullReq ? `: [${pullReq.number}] ${pullReq.title}` : ''}
                 </div>
                 <div className={styles.tabsContainer}>
                     {tabs.map((tab, index)=>(
