@@ -1,5 +1,5 @@
 import subprocess, json, os, sys
-from gemini_handler import summarize_pr, review_pr
+from gemini_handler import summarize_pr, review_pr, generate_commit_title, generate_commit_message
 
 # Global to track the selected repository.
 selected_repo = None
@@ -32,19 +32,15 @@ def get_repo_slug(repo):
         return repo["ownerRepo"]
     # Otherwise, try to parse it from the URL.
     url = repo.get("url", "")
-    # Assuming the URL format is https://github.com/owner/repo
     parts = url.split('/')
     if len(parts) >= 5:
         return parts[3] + '/' + parts[4]
     else:
         raise Exception("Invalid repository URL format")
 
-
 def run_script(script, *args):
-    # Remove leading slash if present to treat as a relative path.
     if script.startswith("/"):
         script = script[1:]
-    # Build an absolute path to the script based on the location of gh_cli.py.
     script_path = os.path.join(BASE_DIR, script)
     result = subprocess.run([script_path, *args], capture_output=True, text=True)
     if result.returncode != 0:
@@ -57,32 +53,28 @@ def run_script(script, *args):
 # PR Handling
 def list_prs(state="open"):
     if selected_repo is None:
-        raise Exception("No repository selected...")
-    # Try to get the full slug from the selected repo.
-    repo_slug = selected_repo.get("ownerRepo")
-    if not repo_slug:
-        repo_slug = get_repo_slug(selected_repo)  # This will parse it from the URL.
+        raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
+    repo_slug = selected_repo.get("ownerRepo") or get_repo_slug(selected_repo)
     return run_script("/scripts/gh_pr_list.sh", repo_slug, state)
-
 
 def create_pr(title, body, base, head):
     if selected_repo is None:
         raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
-    repo_name = selected_repo.get("name")
-    return run_script("/scripts/gh_pr_create.sh", repo_name, title, body, base, head)
+    repo_slug = selected_repo.get("ownerRepo") or get_repo_slug(selected_repo)
+    return run_script("/scripts/gh_pr_create.sh", repo_slug, title, body, base, head)
 
 def view_pr(pr_number):
     if selected_repo is None:
         raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
-    repo_slug = get_repo_slug(selected_repo)  # Use the full slug 
+    repo_slug = selected_repo.get("ownerRepo") or get_repo_slug(selected_repo)
     return run_script("/scripts/gh_pr_view.sh", repo_slug, str(pr_number))
-
 
 def pr_diff(pr_number):
     if selected_repo is None:
         raise Exception("No repository selected. Use 'gh_cli.py repo select <repository_name>' first.")
-    repo_name = selected_repo.get("name")
-    return run_script("/scripts/gh_pr_diff.sh", repo_name, str(pr_number))
+    repo_slug = selected_repo.get("ownerRepo") or get_repo_slug(selected_repo)
+    return run_script("/scripts/gh_pr_diff.sh", repo_slug, str(pr_number))
+
 
 # Gemini Integration
 def summarize_pull_request(pr_number):
@@ -93,13 +85,19 @@ def review_pull_request(pr_number):
     diff = pr_diff(pr_number)
     return review_pr(diff)
 
+def generate_commit_title_from_pr(pr_number):
+    diff = pr_diff(pr_number)
+    return generate_commit_title(diff)
+
+def generate_commit_message_from_pr(pr_number):
+    diff = pr_diff(pr_number)
+    return generate_commit_message(diff)
+
 def gh_api(*args):
     return run_script("./scripts/gh_api.sh", *args)
 
 def list_repos():
-    # Assumes your bash script returns a JSON array of repository details.
     return run_script("./scripts/gh_repo_list.sh")
-
 
 def print_help():
     help_text = """
@@ -109,8 +107,13 @@ Commands:
   pr list                             List open PRs for the selected repository.
   pr create <title> <body> <base> <head>    Create a new PR for the selected repository.
   pr view <pr_number>                 View a PR for the selected repository.
-  git user                          Show the configured git user.
 
+  gemini summarize <pr_number>        Summarize the PR diff using Gemini.
+  gemini review <pr_number>           Review the PR diff using Gemini.
+  gemini commit-title <pr_number>     Generate a commit title based on the PR diff.
+  gemini commit-message <pr_number>   Generate a commit message based on the PR diff.
+
+  git user                          Show the configured git user.
   repo list                         List available repositories.
   repo select <repository_name>       Select a repository by its name (from the repo list).
 
@@ -167,6 +170,39 @@ if __name__ == "__main__":
         else:
             print(f"Unknown PR subcommand: {subcommand}")
 
+    elif command == "gemini":
+        if len(sys.argv) < 4:
+            print("Usage: gh_cli.py gemini <subcommand> <pr_number>")
+            sys.exit(1)
+        subcommand = sys.argv[2]
+        pr_number = sys.argv[3]
+        if subcommand == "summarize":
+            try:
+                result = summarize_pull_request(pr_number)
+                print(result)
+            except Exception as e:
+                print(e)
+        elif subcommand == "review":
+            try:
+                result = review_pull_request(pr_number)
+                print(result)
+            except Exception as e:
+                print(e)
+        elif subcommand == "commit-title":
+            try:
+                result = generate_commit_title_from_pr(pr_number)
+                print(result)
+            except Exception as e:
+                print(e)
+        elif subcommand == "commit-message":
+            try:
+                result = generate_commit_message_from_pr(pr_number)
+                print(result)
+            except Exception as e:
+                print(e)
+        else:
+            print("Unknown gemini subcommand. Available: summarize, review, commit-title, commit-message")
+
     elif command == "git":
         if len(sys.argv) < 3:
             print("Please specify a git subcommand (e.g., user)")
@@ -178,9 +214,12 @@ if __name__ == "__main__":
                 print(f"Git user: {result.stdout.strip()}")
             else:
                 print("Error retrieving git user.")
+        else:
+            print(f"Unknown git subcommand: {subcommand}")
+
     elif command == "repos":
         subcommand = sys.argv[2]
-        if(subcommand == "list"):
+        if subcommand == "list":
             result = list_repos()
             print("Repos", result)
         else:
@@ -196,7 +235,6 @@ if __name__ == "__main__":
                 repos = list_repos()
                 if isinstance(repos, list) and repos:
                     print("Repositories:")
-                    # Print only the repository names.
                     for repo in repos:
                         print(repo.get("name"))
                 else:
