@@ -21,7 +21,6 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
 
     const handleChildData = (pr: PullRequest) => {
         setPullReq(pr);
-        
     }
 
     const renderTab = () => {

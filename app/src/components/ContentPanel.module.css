@@ -49,3 +49,10 @@
 .activeTab {
     background-color: rgb(26, 34, 49);
 }
+
+.contentContainer {
+    margin: 10px;
+    border-radius: 3px;
+    background-color: rgb(32, 45, 74);
+    z-index: 0;
+}
