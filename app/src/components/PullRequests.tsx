@@ -49,7 +49,7 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
     }
 
     return (
-        <div>
+        <div className={styles.pullRequestContainer}>
             {
                 openPrs.map((pr, index) => (
                     <div className={styles.openPullRequest} onClick={() => selectPr(pr)}>

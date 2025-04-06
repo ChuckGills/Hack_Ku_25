@@ -8,9 +8,25 @@
 
 .openPullRequest {
     font-family: 'BigBlueTerminal', sans-serif;
-    padding: 2px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #225435;
+}
+
+.openPullRequest:hover {
+    background-color: #327d4e;
 }
 
 .closedPullRequest {
+    margin-top: 10px;
+    padding: 5px;
     font-family: 'BigBlueTerminal', sans-serif;
+    background-color: #542228;
+}
+
+.closedPullRequest:hover {
+    background-color: #753038;
+}
+
+.pullRequestContainer {
 }

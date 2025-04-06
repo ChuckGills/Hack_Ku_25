@@ -51,7 +51,8 @@
 }
 
 .contentContainer {
-    padding: 12px;
+    margin: 10px;
+    border-radius: 3px;
     background-color: rgb(32, 45, 74);
     z-index: 0;
 }
