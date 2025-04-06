@@ -3,9 +3,42 @@
 }
 
 .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     text-decoration: underline;
     font-size: larger;
-    padding: 16px 12px;
+    /* padding: 16px 12px; */
     font-weight: bold;
     border-bottom: solid 1px #bbbbbb;
+    height: 3.5rem;
+}
+
+.repoText {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.tabsContainer {
+    /* height: 100%; */
+    display: flex;
+    justify-content: space-around;
+    /* gap: 20px; */
+}
+
+.tab {
+    /* border: 2px solid #bbbbbb; */
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+}
+
+.activeTab {
+    background-color: rgb(26, 34, 49);
 }
