@@ -43,11 +43,13 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
             }}>
                 <span style={{
                     fontWeight: 'semi-bold',
+		    fontSize: '20 px',
+		    color: '#33ff33',
                     marginBottom: '4px',
 		    cursor: 'pointer'
                 }}
 	onClick={() => openLink(repo.url)}>
-                    <u>{repo.name}</u>
+                    {repo.name}
                 </span>
                 <span style={{
                     color: 'rgb(127, 210, 249)',

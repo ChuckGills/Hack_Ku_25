@@ -16,18 +16,19 @@ const commands: Command[] = [
 function filterCommands(input: string): string[] {
     // If input is empty, display the top-level commands
     input.trim();
-    if (input === '') {
+    if (input === "") {
 	return commands.map(cmd => cmd.name);
 	
     }
 
     // Split the input into tokens to check if user entered a command and perhaps a sub-command
-    const tokens = input.split(' ');
+    const tokens = input.split(" ");
+    console.log("Token Length", tokens.length);
 
     // When only the top-level command (or its prefix) is entered
     if (tokens.length === 1) {
 	// Look for commands that start with the typed text
-	const matchingCommands = commands.filter(cmd => cmd.name.startsWith(tokens[0]));
+	const matchingCommands = commands.filter(cmd => cmd.name.startsWith(tokens[tokens.length - 1]));
 
 	// If the input exactly matches one top-level command, show its sub-commands
 	if (matchingCommands.length === 1 && matchingCommands[0].name === tokens[0]) {
@@ -38,12 +39,14 @@ function filterCommands(input: string): string[] {
 	}
     } else if (tokens.length > 1) {
 	// If the user has typed a top-level command and begun a sub-command, find the command first.
-	const mainCommand = tokens[tokens.length - 1];
-	const subCommandInput = tokens[tokens.length];
-
+	const mainCommand = tokens[tokens.length - 2];
+	const subCommandInput = tokens[tokens.length - 1];
+	console.log("Main Command: ", mainCommand);
+	console.log("Sub Command: ", subCommandInput);
 	const command = commands.find(cmd => cmd.name === mainCommand);
 	if (command) {
 	    // Filter the sub-commands based on the input.
+	    console.log("Command Options: ", command.subCommands);
 	    const matchingSubCommands = command.subCommands.filter(sub => sub.startsWith(subCommandInput));
 	    return matchingSubCommands;
 	}
@@ -66,26 +69,37 @@ export const Terminal: React.FC = () => {
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
 	if (e.key === "Escape")
 	    inputRef.current.blur();
+
 	if (e.key === "ArrowUp")
 	    setSelectionIndex(selectionIndex - 1 < 0 ? autoComplete.length-1 : selectionIndex - 1);
 	if (e.key === "ArrowDown")
-	    setSelectionIndex(selectionIndex + 1 > autoComplete.length-1 ? 0 : selectionIndex + 1);
+	    setSelectionIndex(selectionIndex + 1 > autoComplete.length-1 ? 0 : selectionIndex + 1)
 	console.log("selection index", selectionIndex);
+
+	if (e.key === "Backspace")
+	    setAutoComplete(filterCommands(cmdText));
 
 	if(e.key === "Tab")
 	{
 	    e.preventDefault();
 	    let commandToken = cmdText.split(" ");
 	    const completedCommand = autoComplete[selectionIndex];
-	    
-	    commandToken.pop();
-	    commandToken.push(completedCommand);
+
+	    if (commandToken.length > 1)
+	    {
+		commandToken[commandToken.length - 1] = completedCommand;
+	    }
+	    else
+	    {
+		commandToken[0] = completedCommand;
+	    }
+
 	    
 	    setCmdText(
 		commandToken.join(" ") + " "
 	    );
 	    setSelectionIndex(0);
-	    setAutoComplete(filterCommands(commandToken.join(" ")));
+	    setAutoComplete(filterCommands(commandToken.join(" ") + " "));
 	}
 	
 	if (e.key !== "Enter") return;
