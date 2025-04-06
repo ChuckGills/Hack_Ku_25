@@ -235,15 +235,8 @@ if __name__ == "__main__":
             sys.exit(1)
         subcommand = sys.argv[2]
         if subcommand == "list":
-            try:
                 repos = list_repos()
-                if isinstance(repos, list) and repos:
-                    for repo in repos:
-                        print(f"Name: {repo.get('name')}, Visibility: {repo.get('visibility')}, Updated At: {repo.get('updatedAt')}, URL: {repo.get('url')}")
-                else:
-                    print("No repositories found.")
-            except Exception as e:
-                print(f"Error listing repositories: {e}")
+                print(repos)
         elif subcommand == "select":
             if len(sys.argv) < 4:
                 print("Usage: gh_cli.py repo select <repository_name>")
