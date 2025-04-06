@@ -30,6 +30,7 @@
   border-color: rgb(141, 242, 255) solid 2px; 
   overflow: visible; /* Allow elements to overflow horizontally */
   position: relative; /* If needed for positioning absolute children */
+  z-index: 999;
 }
 
 /* Inner container that actually scrolls vertically */

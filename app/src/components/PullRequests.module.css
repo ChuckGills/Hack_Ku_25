@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'BigBlueTerminal';
+  src: url('./fonts/BigBlueTerm437NerdFontMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.openPullRequest {
+    font-family: 'BigBlueTerminal', sans-serif;
+    padding: 2px;
+}
+
+.closedPullRequest {
+    font-family: 'BigBlueTerminal', sans-serif;
+}
