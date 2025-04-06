@@ -12,10 +12,10 @@ interface ContentPanelProps {
 
 export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
     // const [currRepo, setCurrRepo] = useState<Repo | null>();
-    const [activeTab, setActiveTab] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState<string>('Pull Requests');
     const [pullReq, setPullReq] = useState<PullRequest>(null);
 
-    const tabs = ['Summary', 'Pull Requests', 'Linter'];
+    const tabs = ['Pull Requests','Summary', 'Linter'];
 
     const handleChildData = (pr: PullRequest) => {
         setPullReq(pr);

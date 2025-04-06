@@ -17,6 +17,9 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
     const [closedPrs, setClosedPrs] = useState<PullRequest[]>([]);
 
     useEffect(() => {
+        if (repo === null) {
+            return;
+        }
         const getPrList = async () => {
             const data = await window.myAPI.runCommand(`pr list`);
 
