@@ -26,8 +26,8 @@
     border: 3px solid #bbb;
     max-height: 30vh;
     overflow-y: none;
-    z-index: 0;
     background-color: rgb(15, 17, 25);
+    z-index: 999;
 }
 
 .outputContainer {

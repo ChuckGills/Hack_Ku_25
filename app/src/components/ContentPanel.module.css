@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'BigBlueTerminal';
+  src: url('./fonts/BigBlueTerm437NerdFontMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .panelContainer {
     height: 100%;
 }
@@ -6,7 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    text-decoration: underline;
+    font-family: 'BigBlueTerminal', sans-serif;
     font-size: larger;
     /* padding: 16px 12px; */
     font-weight: bold;
