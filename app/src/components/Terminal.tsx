@@ -140,7 +140,7 @@ export const Terminal: React.FC = () => {
 
             <div className={styles.inputContainer}>        {/* Input Box */}
             <span className={styles.prefix}>{prefix}</span>
-            <input ref={inputRef} onFocus={onFocus} onBlur={onBlur} value={cmdText} onChange={cmdTextInputHandler} className={styles.input} onKeyDown={handleKeyDown} placeholder="focus" />
+            <input ref={inputRef} onFocus={onFocus} onBlur={onBlur} value={cmdText} onChange={cmdTextInputHandler} className={styles.input} onKeyDown={handleKeyDown} placeholder="gitguru..." />
 
 	    {autoComplete?.length > 0 && isFocused && ( <div className={styles.commandMenu}>	{/* Autofill Box */}
 		<ul>

@@ -60,7 +60,9 @@
     height: 3rem;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     color: #fff;
-    border: #bbb solid 3px;
+    border-left: #bbb solid 1px;
+    border-right: #bbb solid 1px;
+    border-bottom: #bbb  solid 1px;
 }
