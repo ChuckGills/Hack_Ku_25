@@ -28,7 +28,6 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({ repo, pr }) => {
         switch (activeTab) {
             case 'Summary':
                 return <Summary repo={repo} pr={pullReq}/>;
-                return <p>summary</p>
             case 'Pull Requests':
                 return <PullRequests repo={repo} sendDataToParent={handleChildData}/>;
             case 'Code Review':

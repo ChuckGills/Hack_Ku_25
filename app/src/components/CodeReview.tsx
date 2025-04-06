@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest } from './PullRequests';
+import ReactMarkDown from 'react-markdown';
 
 interface CodeReviewProps {
     pr: PullRequest
@@ -22,8 +23,37 @@ export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
     }, [pr])
 
     return (
-        <div>
-            {text}
+        <div style={{
+            padding: '2em',
+            width: 'auto',
+            // wordBreak: 'break-word',
+            // overflowWrap: 'break-word',
+        }}>
+            <ReactMarkDown
+              components={{
+                pre: ({ node, ...props }) => (
+                  <pre
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word',
+                    }}
+                    {...props}
+                  />
+                ),
+                code: ({ node, ...props }) => (
+                  <code
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word',
+                    }}
+                    {...props}
+                  />
+                ),
+              }}>
+                {text}
+            </ReactMarkDown>
         </div>
     )
 }
