@@ -21,7 +21,7 @@
 }
 
 .side {
-  /* Outer container – allows horizontal overflow */
+    /* Outer container – allows horizontal overflow */
   max-width: 24.8vh;
   max-height: 70pvh;
   font-family: 'BigBlueTerminal', sans-serif;
@@ -47,7 +47,6 @@
 .main {
     flex: 1;
     margin-bottom: 5px;
-    max-width: 80vh;
     z-index: 99;
     position: relative;
     overflow: visible;
