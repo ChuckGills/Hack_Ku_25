@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'BigBlueTerminal';
+  src: url('./fonts/BigBlueTerm437NerdFontPropo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -14,7 +21,7 @@
 .side {
     flex: 0 0 20%;
     border-right: 1px solid #bbbbbb;
-    font-family:sans-serif;
+    font-family: 'BigBlueTerminal', sans-serif;
     color: rgb(89, 233, 255);
     max-width: 23vw;
 }

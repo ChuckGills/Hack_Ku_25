@@ -38,8 +38,8 @@ function filterCommands(input: string): string[] {
 	}
     } else if (tokens.length > 1) {
 	// If the user has typed a top-level command and begun a sub-command, find the command first.
-	const mainCommand = tokens[0];
-	const subCommandInput = tokens[1];
+	const mainCommand = tokens[tokens.length - 1];
+	const subCommandInput = tokens[tokens.length];
 
 	const command = commands.find(cmd => cmd.name === mainCommand);
 	if (command) {
@@ -101,6 +101,7 @@ export const Terminal: React.FC = () => {
             setOutputs(prev => [...prev, `Error: ${error}`]);
         }
         setCmdText('');
+	setAutoComplete("");
     };
     
     const cmdTextInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
