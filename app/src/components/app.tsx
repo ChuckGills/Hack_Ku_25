@@ -25,7 +25,7 @@ const App: React.FC = () => {
                 </div>
 	        <div className={styles.sideScroll}>
         	    {/* All the content that needs vertical scrolling goes here */}
-	            <SidePanel />
+	                <SidePanel sendDataToParent={handleChildData}/>
         	    {/* Other side panel content */}
 	        </div>
       	    </div>

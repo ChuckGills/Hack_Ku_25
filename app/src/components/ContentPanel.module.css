@@ -10,8 +10,8 @@
     font-size: larger;
     /* padding: 16px 12px; */
     font-weight: bold;
-    border-bottom: solid 2px #bbbbbb;
-    height: 3.2rem;
+    border-bottom: solid 1px #bbbbbb;
+    height: 3.5rem;
 }
 
 .repoText {

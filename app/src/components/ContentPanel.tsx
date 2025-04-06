@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Repo} from './RepoCard.tsx';
 import styles from './ContentPanel.module.css';
+import { PullRequests } from './PullRequests.tsx';
+
 
 interface ContentPanelProps {
     repo: Repo;
@@ -18,8 +20,8 @@ export const ContentPanel: React.FC<ContentPanelProps> = ({repo}) => {
                 // return <Summary repo={repo} />;
                 return <p>summary</p>
             case 'Pull Requests':
-                // return <PullRequests repo={repo} />;
-                return <p>pull requests</p>
+                return <PullRequests repo={repo} />;
+                // return <p>pull requests</p>
             case 'Linter':
                 // return <Linter repo={repo} />;
                 return <p>linter</p>
