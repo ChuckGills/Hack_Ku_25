@@ -13,30 +13,45 @@
 
 .contentContainer {
     display: flex;
-    border-bottom: 1px solid #bbbbbb;
     height: 70vh;
     min-height: 70vh;
-    flex-direction: row;
-    overflow-y: auto;
-    overflow-x: visible;
-    max-height: 100%;
-    white-space: pre;
+    overflow: visible;
+    max-height: 60vh;
 }
 
 .side {
-    flex: 0 0 200px;
-    border-right: 3px solid #bbbbbb;
-    font-family: 'BigBlueTerminal', sans-serif;
-    color: rgb(89, 233, 255); 
-    max-width: 23vw;
+  /* Outer container – allows horizontal overflow */
+  max-width: 25vh;
+  max-height: 70vh;
+  font-family: 'BigBlueTerminal', sans-serif;
+  color: rgb(89, 233, 255);
+  white-space: pre;
+  overflow: visible; /* Allow elements to overflow horizontally */
+  position: relative; /* If needed for positioning absolute children */
 }
+
+/* Inner container that actually scrolls vertically */
+.sideScroll {
+    display: flex;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    overflow-x: visible; /* Clip horizontal overflow if needed here */
+    max-height: 70vh; /* Or whatever height you want */
+    min-width: 50vh;
+    padding-right: 20px;
+  /* Optionally, add padding/margin so the scrollbar doesn't cover your content */
+}
+
 
 .main {
     flex: 1;
-    font-family: 'BigBlueTerminal', sans-serif;
-    color: rgb(89, 233, 255); 
+    margin-bottom: 5px;
+    max-width: 80vh;
+    z-index: 99;
+    position: relative;
+    overflow: visible;
 }
 
 .terminalContainer {
-    /* max-height: 35vh; */
+    
 }
+ 

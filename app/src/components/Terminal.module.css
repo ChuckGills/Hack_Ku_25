@@ -27,6 +27,7 @@
     max-height: 28vh;
     overflow-y: none;
     z-index: 0;
+    background-color: rgb(15, 17, 25);
 }
 
 .outputContainer {

@@ -33,27 +33,12 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo }) => {
     }
 
     return (
-        <div style={{
-            borderTop: '1px rgb(141, 242, 255) solid',
-            borderBottom: '1px rgb(141, 242, 255) solid',
-            padding: '12px',
-            paddingBottom: '14px'
-        }}
-            onClick={()=>selectRepo(repo.name)}>
-
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%'
-            }}>
-
-                <div className={styles.repoNameContainer}
-                    onClick={() => openLink(repo.url)}>
-                    <div className={styles.repoNameWrapper}>
-                        <span className={styles.repoName}> {repo.name} </span>
-                    </div>
-                </div>
+        <div className={styles.repoCardContainer}>
+	    
+            <div style={{ display: 'flex',
+			  justifyContent: 'space-between',
+			  alignItems: 'center',
+			  width: '100%' }}>
 
                 <span style={{
                     color: repo.visibility === 'PUBLIC'

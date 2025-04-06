@@ -14,15 +14,7 @@
 }
 
 .repoNameContainer {
-    display: flex;
     cursor: pointer;
-    overflow: hidden;
-}
-
-.repoNameContainer:hover {
-    animation: pulsate 2s linear infinite;
-    overflow: visible;
-    white-space: pre;
 }
 
 .repoNameWrapper {
@@ -39,4 +31,20 @@
 
 .repoName:hover {
     cursor: pointer;
+}
+
+.repoCardContainer{
+    border: 1px rgb(141, 242, 255) solid;
+    padding: 12px;
+    padding-bottom: 14px;
+    overflow: hidden;
+    max-width: 20vh;
+    background-color: rgb(15, 17, 25);
+}
+
+.repoCardContainer:hover{
+    animation: pulsate 2s linear infinite;
+    overflow: visible;
+    background-color: rgb(15, 17, 25);
+    max-width: 100vh;
 }

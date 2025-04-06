@@ -18,12 +18,18 @@ const App: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.contentContainer}>
-                <div className={styles.side}>
-                    <SidePanel sendDataToParent={handleChildData}/>
-                </div>
+
+	    <div className={styles.side}>
+	        <div className={styles.sideScroll}>
+        	    {/* All the content that needs vertical scrolling goes here */}
+	            <SidePanel />
+        	    {/* Other side panel content */}
+	        </div>
+      	    </div>
                 <div className={styles.main}>
                     <ContentPanel repo={repo}/>
                 </div>
+
             </div>
             <div className={styles.terminalContainer}>
                 <Terminal />

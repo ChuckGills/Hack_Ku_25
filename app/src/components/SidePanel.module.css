@@ -11,21 +11,9 @@
 .headerContainer{
     text-decoration: underline;
     font-size: larger;
-    padding: 16px 15px;
+    padding: 4px 2px;
     font-weight: bold;
     border-bottom: solid 2px #bbbbbb;
     height: 3.5rem;
 }
 
-.contentContainer {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    overflow-x:hidden;
-    overflow-wrap: break-word;
-    max-height: 100%;
-    white-space: pre;
-    /* word-wrap: normal; */
-    /* gap: 12px; */
-    /* font-size:x-small */
-}
