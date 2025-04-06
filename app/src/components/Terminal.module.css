@@ -9,12 +9,19 @@
     }
 }
 
+@font-face {
+  font-family: 'BigBlueTerminal';
+  src: url('./fonts/BigBlueTerm437NerdFontMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .terminalContainer {
     display: flex;
     flex-direction: column;
     /* height: 100vh; */
     /* height: fit-content; */
-    font-family: monospace;
+    font-family: 'BigBlueTerminal', monospace;
     color: rgb(141, 242, 255);
     border: 3px solid #bbb;
     max-height: 28vh;
