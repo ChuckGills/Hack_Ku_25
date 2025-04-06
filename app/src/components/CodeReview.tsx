@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest } from './PullRequests';
 import ReactMarkDown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 
 interface CodeReviewProps {
     pr: PullRequest
@@ -25,35 +28,60 @@ export const CodeReview: React.FC<CodeReviewProps> = ({ pr }) => {
     return (
         <div style={{
             padding: '2em',
-            width: 'auto',
+            paddingBottom: '5em',
+            width: '75vw',
+            overflowY: 'scroll',
+            height: '61vh',
+            fontFamily: "'BigBlueTerminal', sans-serif"
             // wordBreak: 'break-word',
             // overflowWrap: 'break-word',
         }}>
             <ReactMarkDown
-              components={{
-                pre: ({ node, ...props }) => (
-                  <pre
-                    style={{
-                      whiteSpace: 'pre-wrap',
-                      wordBreak: 'break-word',
-                      overflowWrap: 'break-word',
-                    }}
-                    {...props}
-                  />
-                ),
-                code: ({ node, ...props }) => (
-                  <code
-                    style={{
-                      whiteSpace: 'pre-wrap',
-                      wordBreak: 'break-word',
-                      overflowWrap: 'break-word',
-                    }}
-                    {...props}
-                  />
-                ),
-              }}>
-                {text}
-            </ReactMarkDown>
-        </div>
+                  children={text}
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeHighlight]}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      return inline ? (
+                        <code
+                          style={{
+                            backgroundColor: '#2d2d2d',
+                            borderRadius: '4px',
+                            padding: '0.2em 0.4em',
+                            fontSize: '14px',
+                            fontFamily:
+                              'SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace',
+                          }}
+                          {...props}
+                        >
+                          {children}
+                        </code>
+                      ) : (
+                        <pre
+                          style={{
+                            backgroundColor: '#2d2d2d',
+                            borderRadius: '6px',
+                            padding: '1em',
+                            whiteSpace: 'pre-wrap',
+                            overflowWrap: 'break-word',
+                            maxWidth: '100%',
+                            overflowX: 'auto',
+                            fontFamily:
+                              'SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace',
+                          }}
+                        >
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        </pre>
+                      );
+                    },
+                }}
+                />
+            {/* </ReactMarkDown> */}
+            <br />
+            <br />
+            <br />
+        </div >
     )
 }
