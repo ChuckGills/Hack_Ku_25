@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { exec } from 'child_process';
@@ -13,6 +13,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, '/../../src/preload.ts'),
     },
@@ -36,6 +37,10 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+ipcMain.handle('open-url', (event, url) => {
+  shell.openExternal(url);  // Open URL in default browser
+  return 'URL opened successfully';
+});
 
 ipcMain.handle('run-command', async (event, cmd: string) => {
 

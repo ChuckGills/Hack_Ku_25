@@ -16,6 +16,7 @@ export const SidePanel: React.FC = () => {
             let raw = result.replace(/^Repos\s*/, '');
             raw = raw.replace(/'/g, '"');
             const res: Repo[] = JSON.parse(raw.slice());
+            // console.log("raw", raw, raw.slice[0])
             setRepos(res);
         }
 
@@ -30,8 +31,8 @@ export const SidePanel: React.FC = () => {
 
             <div className={styles.contentContainer}>
                 {
-                    repos.map((repo) => (
-                        <RepoCard repo={repo}/>
+                    repos.map((repo, index) => (
+                        <RepoCard key={`repo_card_${index}`}repo={repo}/>
                     ))
                 }
             </div>
