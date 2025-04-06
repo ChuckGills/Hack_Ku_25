@@ -30,4 +30,5 @@
 
 .pullRequestContainer {
     overflow-y: scroll;
+    height: 61vh;
 }

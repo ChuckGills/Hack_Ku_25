@@ -53,9 +53,9 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
             {
                 openPrs.map((pr, index) => (
                     <div className={styles.openPullRequest} onClick={() => selectPr(pr)}>
-			<span style={{ color: 'grey' }}> { `[${pr.number}] > ` }</span>
+                        <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
                         <span style={{ color: '#33ff33' }}>{`open`}</span>
-			<span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
+                        <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
                         <span style={{ color: 'white' }}>{`${pr.title}`}</span>
                     </div>
                 ))
@@ -63,9 +63,9 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
             {
                 closedPrs.map((pr, index) => (
                     <div className={styles.closedPullRequest} onClick={() => selectPr(pr)}>
-			<span style={{ color: 'grey' }}> { `[${pr.number}] > ` }</span>
+                        <span style={{ color: 'grey' }}> {`[${pr.number}] > `}</span>
                         <span style={{ color: 'red' }}>{`closed`}</span>
-		    	<span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
+                        <span style={{ color: 'yellow' }}> {`${pr.author}: `}</span>
                         <span style={{ color: 'white' }}>{`${pr.title}`}</span>
                     </div>
                 ))
