@@ -16,14 +16,18 @@
     border-bottom: 1px solid #bbbbbb;
     height: 70vh;
     min-height: 70vh;
+    flex-direction: row;
+    overflow-y: auto;
+    overflow-x: visible;
+    max-height: 100%;
+    white-space: pre;
 }
 
 .side {
-    flex: 0 0 20%;
+    flex: 0 0 200px;
     border-right: 1px solid #bbbbbb;
     font-family: 'BigBlueTerminal', sans-serif;
-    color: rgb(89, 233, 255);
-    max-width: 23vw;
+    color: rgb(89, 233, 255); 
 }
 
 .main {
