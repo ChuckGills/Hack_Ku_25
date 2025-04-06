@@ -10,7 +10,9 @@ interface Command {
 const commands: Command[] = [
     { name: 'pr', subCommands: ['view', 'list', 'create'] },
     { name: 'git', subCommands: ['user'] },
-    { name: 'repo', subCommands: ['list', 'select']}
+    { name: 'repo', subCommands: ['list', 'select']},
+    { name: 'gemini', subCommands: ['summarize', 'review', 'commit-title', 'commit-message']},
+    { name: 'api', subCommands: []}
 ];
 
 function filterCommands(input: string): string[] {
@@ -23,7 +25,6 @@ function filterCommands(input: string): string[] {
 
     // Split the input into tokens to check if user entered a command and perhaps a sub-command
     const tokens = input.split(" ");
-    console.log("Token Length", tokens.length);
 
     // When only the top-level command (or its prefix) is entered
     if (tokens.length === 1) {
@@ -41,9 +42,8 @@ function filterCommands(input: string): string[] {
 	// If the user has typed a top-level command and begun a sub-command, find the command first.
 	const mainCommand = tokens[tokens.length - 2];
 	const subCommandInput = tokens[tokens.length - 1];
-	console.log("Main Command: ", mainCommand);
-	console.log("Sub Command: ", subCommandInput);
 	const command = commands.find(cmd => cmd.name === mainCommand);
+
 	if (command) {
 	    // Filter the sub-commands based on the input.
 	    console.log("Command Options: ", command.subCommands);

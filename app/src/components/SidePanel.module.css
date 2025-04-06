@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 .panelContainer {
     display: flex;
     flex-direction: column; /* Stack header and content vertically */
@@ -15,10 +19,11 @@
 .contentContainer {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x:hidden;
     overflow-wrap: break-word;
     max-height: 100%;
+    white-space: pre;
     /* word-wrap: normal; */
     /* gap: 12px; */
     /* font-size:x-small */

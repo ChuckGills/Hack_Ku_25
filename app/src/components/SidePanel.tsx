@@ -19,7 +19,6 @@ export const SidePanel: React.FC = () => {
             // console.log("raw", raw, raw.slice[0])
             setRepos(res);
         }
-
         fetchRepos();
     }, []);
 
