@@ -53,13 +53,14 @@ export const PullRequests: React.FC<PullRequestsProps> = ({ repo, sendDataToPare
     return (
         <div className={styles.pullRequestContainer}>
             {loading ? (
-                <div style={{width:'60vw'}}>
+                <div style={{display: 'flex',
+                    justifyContent: 'center'}}>
 
                 <img src={'logo.png'} style={{
                     display:'flex',
                     justifyContent:'center',
                     alignItems:'center',
-                    maxWidth: '100%', /* Ensure the image fits within the container */
+                    width: '50%', /* Ensure the image fits within the container */
                     height: 'auto'
                   }}/>
                 </div>

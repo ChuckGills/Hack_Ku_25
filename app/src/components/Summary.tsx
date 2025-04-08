@@ -91,13 +91,17 @@ export const Summary: React.FC<SummaryProps> = ({ repo, pr }) => {
             <br />
             <br />
             </>):(
+                <div style={{display: 'flex',
+                    justifyContent: 'center'}}>
+
                 <img src={'logo.png'} style={{
                     display:'flex',
                     justifyContent:'center',
                     alignItems:'center',
-                    maxWidth: '100%', /* Ensure the image fits within the container */
+                    width: '50%', /* Ensure the image fits within the container */
                     height: 'auto'
                   }}/>
+                </div>
             )}
             
         </div >
